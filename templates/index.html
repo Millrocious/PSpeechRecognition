@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Speech Emotion Recognition</title>
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: #232323;
+        }
+
+        h1 {
+            color: #999999;
+        }
+
+        .container {
+            background-color: #2e2e2e;
+            border-radius: 30px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+            padding: 50px;
+            text-align: center;
+        }
+
+        form {
+            margin-top: 20px;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            align-items: center;
+        }
+
+        input[type="file"] {
+            display: none;
+        }
+
+        .custom-file-input {
+            background-color: #f1bba4;
+            color: #2c2c2c;
+            border: none;
+            font-weight: bold;
+            border-radius: 30px;
+            padding: 5px 10px;
+            font-size: 16px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+            flex: 1 1 50%;
+        }
+
+        .custom-file-input:hover {
+            background-color: #d39182;
+        }
+
+        .custom-file-input:focus {
+            outline: none;
+        }
+
+        .custom-submit-button {
+            background-color: #6f9aca;
+            color: #2c2c2c;
+            border: none;
+            font-weight: bold;
+            border-radius: 30px;
+            padding: 10px 15px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+            flex: 1;
+            font-size: 16px;
+        }
+
+        .custom-submit-button:hover {
+            background-color: #90bced;
+        }
+
+        .custom-submit-button:focus {
+            outline: none;
+        }
+
+        .filename-text {
+            display: inline-block;
+            color: #ffffff;
+            padding: 5px 10px;
+            font-weight: bold;
+            background-color: #3a3a3a;
+            border-radius: 100px;
+            flex: 1 1 50%;
+            margin: 10px;
+            font-size: 16px;
+            margin-left: 0px;
+            padding-left: 0px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Speech Emotion Recognition</h1>
+        <form action="/predict" method="post" enctype="multipart/form-data">
+            <label for="file" class="custom-file-input">Browse</label>
+            <input type="file" name="file" id="file" accept=".wav">
+            <span class="filename-text" id="filename-text">No file selected</span>
+            <input type="submit" value="Predict" class="custom-submit-button">
+        </form>
+        <div id="result">
+            {{ emotion_result|safe }}
+        </div>
+    </div>
+
+    <script>
+        document.getElementById("file").addEventListener("change", function() {
+            document.getElementById("filename-text").textContent = this.files[0].name;
+        });
+    </script>
+</body>
+</html>
